@@ -1,0 +1,42 @@
+﻿<Page
+    x:Class="App1.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:App1"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:enumeration="using:Windows.Devices.Enumeration"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Center">
+
+    <Grid x:Name="MainGrid" Loaded="MainGrid_Loaded" HorizontalAlignment="Center" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Connection state: "/>
+            <TextBlock x:Name="ConnectionState" Grid.Row="0" Text="Disconnected."/>
+        </StackPanel>
+        
+        <ListView x:Name="DeviceListView" ItemsSource="{x:Bind devices}" Grid.Row="1">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="enumeration:DeviceInformation">
+                    <StackPanel Orientation="Horizontal" Margin="6">
+                        <SymbolIcon Symbol="Audio" Margin="0,0,12,0"/>
+                        <StackPanel>
+                            <TextBlock Text="{x:Bind Name}" FontWeight="Bold"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+        <StackPanel Orientation="Vertical" Grid.Row="2">
+            <Button x:Name="EnableAudioPlaybackConnectionButton" Content="Enable Audio Playback Connection" Click="EnableAudioPlaybackConnectionButton_Click"/>
+            <Button x:Name="ReleaseAudioPlaybackConnectionButton" Content="Release Audio Playback Connection" Click="ReleaseAudioPlaybackConnectionButton_Click"/>
+            <Button x:Name="OpenAudioPlaybackConnectionButtonButton" Content="Open Connection" Click="OpenAudioPlaybackConnectionButtonButton_Click" IsEnabled="False"/>
+        </StackPanel>
+
+    </Grid>
+</Page>
